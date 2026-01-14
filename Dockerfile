@@ -15,5 +15,6 @@ RUN chmod -R 775 storage bootstrap/cache
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
+# CMD php-fpm & nginx -g 'daemon off;'
 CMD php artisan migrate --force && php-fpm & nginx -g 'daemon off;'
 
