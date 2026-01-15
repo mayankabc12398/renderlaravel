@@ -11,10 +11,9 @@ COPY . .
 
 RUN composer install --no-dev --optimize-autoloader
 
+RUN mkdir -p /run/php && chmod 777 /run/php
 RUN chmod -R 775 storage bootstrap/cache
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# CMD php-fpm & nginx -g 'daemon off;'
-CMD php artisan migrate --force && php-fpm & nginx -g 'daemon off;'
-
+CMD php-fpm -D && nginx -g 'daemon off;'
